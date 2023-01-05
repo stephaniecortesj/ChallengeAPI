@@ -1,2 +1,15 @@
-package runners;public class GestionUsuarioRunner {
+package runners;
+
+import io.cucumber.junit.CucumberOptions;
+import net.serenitybdd.cucumber.CucumberWithSerenity;
+import org.junit.runner.RunWith;
+
+@RunWith(CucumberWithSerenity.class)
+@CucumberOptions(
+        features = "src/test/resources",
+        glue = {"stepdefinitions"}, tags = "@create"
+)
+
+public class GestionUsuarioRunner {
+
 }

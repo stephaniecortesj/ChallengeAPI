@@ -1,19 +1,85 @@
-plugins {
-    id 'java'
+defaultTasks 'clean', 'test', 'aggregate'
+
+buildscript {
+    repositories {
+        mavenCentral()
+        maven {
+            url "https://plugins.gradle.org/m2/"
+        }
+    }
+    dependencies {
+        classpath "net.serenity-bdd:serenity-gradle-plugin:3.3.0"
+        classpath "io.freefair.gradle:lombok-plugin:5.0.0-rc6"
+    }
 }
 
-group 'org.example'
-version '1.0-SNAPSHOT'
+tasks.withType(JavaCompile) {
+    options.encoding = "UTF-8"
+}
+
+apply plugin: 'java'
+apply plugin: 'idea'
+apply plugin: "net.serenity-bdd.serenity-gradle-plugin"
+apply plugin: "io.freefair.lombok"
+apply plugin: "io.freefair.lombok"
+group 'com.ficohsa.cda.automation'
+
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
 
 repositories {
     mavenCentral()
+    mavenLocal()
+}
+
+ext {
+    slf4jVersion = '1.7.7'
+    serenityCoreVersion = '3.3.0'
+    serenityCucumberVersion = '3.3.0'
+    junitVersion = '4.13.1'
+    assertJVersion = '3.23.1'
+    logbackVersion = '1.7.25'
+    jacksonVersion = '2.10.3'
 }
 
 dependencies {
-    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.8.1'
-    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.8.1'
+    testImplementation group: 'org.slf4j', name: 'slf4j-simple', version: '1.7.25'
+    implementation 'org.apache.logging.log4j:log4j-api:2.11.1'
+    implementation 'org.apache.logging.log4j:log4j-core:2.11.1'
+
+    testImplementation "net.serenity-bdd:serenity-core:${serenityCoreVersion}",
+
+            "net.serenity-bdd:serenity-cucumber:${serenityCucumberVersion}",
+            "net.serenity-bdd:serenity-screenplay-webdriver:${serenityCoreVersion}",
+            "net.serenity-bdd:serenity-ensure:${serenityCoreVersion}",
+            "junit:junit:${junitVersion}",
+            "org.junit.platform:junit-platform-launcher:1.8.2",
+            "org.junit.jupiter:junit-jupiter-engine:5.8.2",
+            "org.junit.vintage:junit-vintage-engine:5.8.2",
+            "org.assertj:assertj-core:${assertJVersion}"
+
+    implementation "com.fasterxml.jackson.core:jackson-core:${jacksonVersion}",
+            "com.fasterxml.jackson.core:jackson-databind:${jacksonVersion}",
+            "net.serenity-bdd:serenity-screenplay:${serenityCoreVersion}",
+            "net.serenity-bdd:serenity-screenplay-rest:${serenityCoreVersion}",
+            "com.fasterxml.jackson.core:jackson-annotations:${jacksonVersion}"
+}
+
+
+wrapper {
+    gradleVersion = '7.2'
 }
 
 test {
-    useJUnitPlatform()
+    testLogging.showStandardStreams = true
+    systemProperties System.getProperties()
 }
+
+serenity {
+    testRoot = "automation"
+    requirementsDir = "src/test/resources/features"
+    requirementsBaseDir = "src/test/resources/features"
+}
+
+gradle.startParameter.continueOnFailure = true
+test.finalizedBy(aggregate)
