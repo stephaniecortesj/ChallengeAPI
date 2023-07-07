@@ -1,18 +1,22 @@
-#language: es
+#language: en
 #Autor: Stephanie Cortes
 
-Característica: Yo como usuario de Reqres
-  deseo realizar el consumo de los diferentes apis
-  para validar la creación, consulta, actualización y eliminación de usuarios
+Feature: As a user of Reqres
+I wish to perform the consumption of the different apis
+to validate the creation, consultation, update and deletion of users.
 
 
-  @create
-  Esquema del escenario: crear usuarios
-    Cuando Luis envia <name> y <job>
-    Entonces obtengo el codigo de respuesta 201
-    Y valido que el usuario se cree correctamente
 
-    Ejemplos:
-    |name   |   job     |
-    |stepha | Automation|
+@create
+Scenario Outline: create users successfully
+   When Luis sends <name> and <job>
+   Then I get response code 201
+   And valid that the user <name> is created correctly
+
+
+Examples:
+   |name    |   job     |
+   |stepha  | Automation|
+   |carlos  | QA|
+   |alberto | Engineer|
 

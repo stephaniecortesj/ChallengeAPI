@@ -10,6 +10,6 @@ import org.junit.runner.RunWith;
         glue = {"stepdefinitions"}, tags = "@create"
 )
 
-public class GestionUsuarioRunner {
+public class UserManagementRunner {
 
 }

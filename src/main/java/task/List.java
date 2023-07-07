@@ -6,14 +6,14 @@ import net.serenitybdd.screenplay.Performable;
 import net.serenitybdd.screenplay.Task;
 import net.serenitybdd.screenplay.Tasks;
 
-public class Listar implements Task {
-    public static Performable usuarios(){
-      return Tasks.instrumented(Listar.class);
+public class List implements Task {
+    public static Performable users(){
+      return Tasks.instrumented(List.class);
     }
 
     @Override
     public <T extends Actor> void performAs(T actor) {
-        actor.attemptsTo(GetLista.usuariosExistentes());
+        actor.attemptsTo(GetLista.usersExisting());
     }
 }
 

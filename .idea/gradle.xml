@@ -13,6 +13,13 @@
         <option name="modules">
           <set>
             <option value="$PROJECT_DIR$" />
+            <option value="$PROJECT_DIR$/build" />
+            <option value="$PROJECT_DIR$/build/generated" />
+            <option value="$PROJECT_DIR$/build/generated/sources" />
+            <option value="$PROJECT_DIR$/build/generated/sources/annotationProcessor" />
+            <option value="$PROJECT_DIR$/build/generated/sources/annotationProcessor/java" />
+            <option value="$PROJECT_DIR$/build/generated/sources/annotationProcessor/java/main" />
+            <option value="$PROJECT_DIR$/build/generated/sources/annotationProcessor/java/main/Builder" />
           </set>
         </option>
       </GradleProjectSettings>

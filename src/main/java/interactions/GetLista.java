@@ -9,7 +9,7 @@ import net.serenitybdd.screenplay.rest.interactions.Get;
 import static net.serenitybdd.screenplay.Tasks.instrumented;
 
 public class GetLista implements Interaction {
-    public static Performable usuariosExistentes() {
+    public static Performable usersExisting() {
         return instrumented(GetLista.class);
     }
 
